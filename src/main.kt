@@ -1,4 +1,3 @@
-import com.sun.org.apache.xpath.internal.operations.Bool
 import java.util.*
 import kotlin.math.abs
 import kotlin.system.measureTimeMillis
@@ -13,18 +12,32 @@ fun main(args: Array<String>) {
     val size = 'z'.toInt() - min
 
     val intArray = IntArray(size)
+    val charList = mutableListOf<Char>()
+    val countList = mutableListOf<Int>()
 
     val measureTimeMillis = measureTimeMillis {
 
         //    val charList = text.toSet().toList()
+//
+//        text.forEach {
+//            val i = it.toInt() - min
+//            intArray[i]++
+//        }
 
         text.forEach {
-            val i = it.toInt() - min
-            intArray[i]++
+            val i = charList.indexOf(it)
+            if (i>=0)
+                countList[i]++
+            else{
+                charList.add(it)
+                countList.add(1)
+            }
+
         }
 
 //        val frecuancyList = text.groupBy { it }.values.map { it.count() }
-        val frecuancyList = intArray.filter { it != 0 }
+      //  val frecuancyList = intArray.filter { it != 0 }
+        val frecuancyList = countList
 
         val first = frecuancyList[0]
         val count = frecuancyList.count { it == first }
